@@ -1,45 +1,44 @@
 import Hero from "../components/Hero";
-import StatCard from "../components/StatCard";
 
-export default function Home() {
+export default function HomePage() {
   return (
     <main>
       <Hero />
 
-      <section className="mx-auto grid max-w-7xl gap-6 px-6 pb-16 md:grid-cols-3">
-        <StatCard
-          title="Calendar"
-          value="Live Week"
-          subtitle="Événements économiques filtrés sur la période actuelle avec recherche, filtres et niveau d’impact."
-        />
+      <section className="page-wrap">
+        <div className="grid-3">
+          <div className="card p-6">
+            <p className="text-xs uppercase tracking-[0.18em] text-white/45">
+              Calendar
+            </p>
+            <h2 className="mt-3 text-2xl font-semibold">Date picker complet</h2>
+            <p className="mt-3 text-sm leading-7 text-white/65">
+              Tu peux choisir librement une date de début et une date de fin, ou
+              basculer rapidement sur Today / This Week / Next Week.
+            </p>
+          </div>
 
-        <StatCard
-          title="News"
-          value="Fresh Feed"
-          subtitle="News marché récentes récupérées via API backend avec recherche front et liens de sortie."
-        />
+          <div className="card p-6">
+            <p className="text-xs uppercase tracking-[0.18em] text-white/45">
+              Charts
+            </p>
+            <h2 className="mt-3 text-2xl font-semibold">Graphiques propres</h2>
+            <p className="mt-3 text-sm leading-7 text-white/65">
+              Page charting dédiée avec historique forex et base pour ajouter
+              plus tard des overlays techniques.
+            </p>
+          </div>
 
-        <StatCard
-          title="Base MVP"
-          value="Clean Stack"
-          subtitle="Frontend propre, backend Next.js, composants réutilisables et structure prête à évoluer."
-        />
-      </section>
-
-      <section className="mx-auto max-w-7xl px-6 pb-20">
-        <div className="rounded-[30px] border border-white/10 bg-white/5 p-8">
-          <p className="text-sm uppercase tracking-[0.18em] text-white/45">
-            Vision produit
-          </p>
-          <h2 className="mt-3 text-3xl font-semibold text-white">
-            Actan IA comme base de plateforme FinTech
-          </h2>
-          <p className="mt-4 max-w-3xl text-base leading-8 text-white/65">
-            Cette version se concentre sur le cœur d’un MVP propre : navigation,
-            calendrier, news et dashboard. La suite logique sera d’ajouter un
-            journal de trading, une couche IA d’explication macro, des alertes,
-            puis une base de données utilisateur.
-          </p>
+          <div className="card p-6">
+            <p className="text-xs uppercase tracking-[0.18em] text-white/45">
+              Macro feed
+            </p>
+            <h2 className="mt-3 text-2xl font-semibold">News + squawk</h2>
+            <p className="mt-3 text-sm leading-7 text-white/65">
+              News marché, flux texte type squawk et tri rapide des événements
+              à plus fort impact.
+            </p>
+          </div>
         </div>
       </section>
     </main>

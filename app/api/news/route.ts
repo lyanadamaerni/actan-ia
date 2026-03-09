@@ -1,6 +1,6 @@
 export const dynamic = "force-dynamic";
 
-type RawNewsItem = {
+type RawNews = {
   title?: string;
   text?: string;
   url?: string;
@@ -9,10 +9,13 @@ type RawNewsItem = {
   symbol?: string;
 };
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    const url = new URL(request.url);
+    const limit = url.searchParams.get("limit") || "20";
+
     const response = await fetch(
-      "https://financialmodelingprep.com/stable/news/stock-latest?page=0&limit=20&apikey=demo",
+      `https://financialmodelingprep.com/stable/news/stock-latest?page=0&limit=${limit}&apikey=demo`,
       { cache: "no-store" }
     );
 
@@ -23,20 +26,18 @@ export async function GET() {
       );
     }
 
-    const data: RawNewsItem[] = await response.json();
-
-    const items = data.map((item) => ({
-      title: item.title || "Untitled",
-      text: item.text || "",
-      url: item.url || "",
-      site: item.site || "",
-      publishedDate: item.publishedDate || "",
-      symbol: item.symbol || "",
-    }));
+    const data: RawNews[] = await response.json();
 
     return Response.json({
+      items: data.map((item) => ({
+        title: item.title || "Untitled",
+        text: item.text || "",
+        url: item.url || "",
+        site: item.site || "",
+        publishedDate: item.publishedDate || "",
+        symbol: item.symbol || "",
+      })),
       generatedAt: new Date().toISOString(),
-      items,
     });
   } catch (error) {
     return Response.json(

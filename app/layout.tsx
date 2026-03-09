@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 
 export const metadata = {
   title: "Actan IA",
-  description: "AI macro intelligence platform for traders",
+  description: "Macro intelligence SaaS MVP",
 };
 
 export default function RootLayout({
@@ -14,8 +14,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr">
-      <body className="bg-neutral-950 text-white antialiased">
-        <div className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(59,130,246,0.15),_transparent_35%),radial-gradient(circle_at_bottom,_rgba(168,85,247,0.12),_transparent_30%),linear-gradient(to_bottom,_#050816,_#0a0f1f)]">
+      <body>
+        <div className="app-shell">
           <Navbar />
           {children}
         </div>

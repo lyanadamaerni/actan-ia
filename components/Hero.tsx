@@ -8,25 +8,24 @@ export default function Hero() {
   });
 
   return (
-    <section className="mx-auto max-w-7xl px-6 pt-16 pb-10">
-      <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_0.85fr]">
+    <section className="page-wrap">
+      <div className="grid items-center gap-8 lg:grid-cols-[1.2fr_0.8fr]">
         <div>
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.2em] text-white/70">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.18em] text-white/70">
             <span className="inline-block h-2 w-2 rounded-full bg-emerald-400" />
             Données du jour — {today}
           </div>
 
-          <h1 className="max-w-4xl text-5xl font-semibold leading-tight tracking-tight text-white md:text-7xl">
+          <h1 className="max-w-4xl text-5xl font-semibold leading-tight tracking-tight md:text-7xl">
             Actan IA
-            <span className="mt-2 block bg-gradient-to-r from-blue-300 via-cyan-200 to-violet-300 bg-clip-text text-transparent">
-              analyse le macro, les news et le calendrier économique
+            <span className="mt-3 block bg-gradient-to-r from-blue-300 via-cyan-200 to-violet-300 bg-clip-text text-transparent">
+              calendrier, news, charting, seasonality, squawk et positioning
             </span>
           </h1>
 
           <p className="mt-6 max-w-2xl text-lg leading-8 text-white/65">
-            Un MVP FinTech propre pour suivre les événements macroéconomiques,
-            filtrer les news de marché et poser les bases d’une vraie plateforme
-            d’analyse.
+            MVP FinTech propre avec backend Next.js, filtres de dates, flux macro,
+            charting forex et pages prêtes à évoluer vers un vrai SaaS.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-4">
@@ -41,7 +40,7 @@ export default function Hero() {
               href="/news"
               className="rounded-2xl border border-white/15 bg-white/5 px-6 py-4 text-sm font-semibold text-white transition hover:bg-white/10"
             >
-              Voir les news marché
+              Voir les news
             </Link>
 
             <Link
@@ -53,45 +52,27 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="rounded-[28px] border border-white/10 bg-white/5 p-6 shadow-2xl shadow-black/40">
-          <div className="mb-4 flex items-center justify-between">
-            <div>
-              <p className="text-sm text-white/50">Vue rapide</p>
-              <h2 className="text-xl font-semibold text-white">
-                Macro command center
-              </h2>
-            </div>
-            <div className="rounded-xl border border-emerald-400/20 bg-emerald-500/10 px-3 py-1 text-xs text-emerald-300">
-              Live
-            </div>
-          </div>
-
-          <div className="space-y-4">
+        <div className="card p-6">
+          <p className="text-sm uppercase tracking-[0.18em] text-white/45">
+            Aperçu
+          </p>
+          <div className="mt-4 space-y-4">
             <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-              <p className="text-xs uppercase tracking-[0.18em] text-white/40">
-                Calendar
-              </p>
-              <p className="mt-2 text-sm text-white/70">
-                Événements filtrés sur la semaine en cours.
+              <h3 className="font-semibold">Calendar</h3>
+              <p className="mt-2 text-sm text-white/60">
+                Filtres de dates libres, recherche, pays et impact.
               </p>
             </div>
-
             <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-              <p className="text-xs uppercase tracking-[0.18em] text-white/40">
-                News
-              </p>
-              <p className="mt-2 text-sm text-white/70">
-                Headlines récentes avec recherche et ouverture de lien.
+              <h3 className="font-semibold">Charts + Seasonality</h3>
+              <p className="mt-2 text-sm text-white/60">
+                Historique forex + calcul saisonnier simple.
               </p>
             </div>
-
             <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-              <p className="text-xs uppercase tracking-[0.18em] text-white/40">
-                Dashboard
-              </p>
-              <p className="mt-2 text-sm text-white/70">
-                Résumé produit, accès rapide et base pour les prochaines
-                fonctionnalités IA.
+              <h3 className="font-semibold">Squawk + Positioning</h3>
+              <p className="mt-2 text-sm text-white/60">
+                Feed texte macro et panneaux positioning prêts à brancher.
               </p>
             </div>
           </div>

@@ -1,129 +1,38 @@
 export const dynamic = "force-dynamic";
 
-type RawCalendarEvent = {
-  CalendarId?: string;
-  Date: string;
-  Country: string;
-  Event: string;
-  Category?: string;
-  Importance?: number;
-  Actual?: string;
-  Previous?: string;
-  Forecast?: string;
-};
-
-function formatDate(date: Date) {
-  return date.toISOString().split("T")[0];
-}
-
-function getDateRange(range: string) {
-
-  const today = new Date()
-
-  let start = new Date(today)
-  let end = new Date(today)
-
-  if (range === "today") {
-
-    start = today
-    end = today
-
-  } else if (range === "nextWeek") {
-
-    start = new Date(today)
-    start.setDate(today.getDate() + 7)
-
-    end = new Date(today)
-    end.setDate(today.getDate() + 14)
-
-  } else {
-
-    // semaine actuelle
-
-    start = today
-
-    end = new Date(today)
-    end.setDate(today.getDate() + 7)
-
-  }
-
-  return {
-    initDate: formatDate(start),
-    endDate: formatDate(end)
-  }
-
-}
-
 export async function GET(request: Request) {
 
-  try {
+  const url = new URL(request.url)
 
-    const { searchParams } = new URL(request.url)
+  const from = url.searchParams.get("from")
+  const to = url.searchParams.get("to")
 
-    const rangeParam = searchParams.get("range") || "thisWeek"
+  const response = await fetch(
+    "https://api.tradingeconomics.com/calendar?c=guest:guest&f=json",
+    { cache:"no-store" }
+  )
 
-    const { initDate, endDate } = getDateRange(rangeParam)
+  const data = await response.json()
 
-    const response = await fetch(
-      "https://api.tradingeconomics.com/calendar?c=guest:guest&f=json",
-      { cache: "no-store" }
-    )
+  let events = data
 
-    if (!response.ok) {
+  if(from && to){
 
-      return Response.json(
-        { error: "Impossible de charger le calendrier." },
-        { status: 500 }
-      )
+    const start = new Date(from)
+    const end = new Date(to)
 
-    }
+    events = data.filter((event:any)=>{
 
-    const data: RawCalendarEvent[] = await response.json()
+      const date = new Date(event.Date)
 
-    const filteredEvents = data
-      .filter((event) => {
-
-        const eventDate = new Date(event.Date)
-
-        return (
-          eventDate >= new Date(initDate) &&
-          eventDate <= new Date(endDate)
-        )
-
-      })
-      .sort(
-        (a, b) =>
-          new Date(a.Date).getTime() -
-          new Date(b.Date).getTime()
-      )
-      .slice(0, 150)
-
-    return Response.json({
-
-      generatedAt: new Date().toISOString(),
-
-      filter: {
-        range: rangeParam,
-        initDate,
-        endDate
-      },
-
-      count: filteredEvents.length,
-
-      events: filteredEvents
+      return date >= start && date <= end
 
     })
 
-  } catch (error) {
-
-    return Response.json(
-      {
-        error: "Erreur serveur calendrier",
-        details: String(error)
-      },
-      { status: 500 }
-    )
-
   }
+
+  return Response.json({
+    events
+  })
 
 }
